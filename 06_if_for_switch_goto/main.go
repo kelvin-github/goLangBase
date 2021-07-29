@@ -87,6 +87,5 @@ func main() {
 
 func goto01(){
     var x1 = "x01"    
-    fmt.Println("label = ",x1)
-    
+    fmt.Println("label = ",x1)    
 }
