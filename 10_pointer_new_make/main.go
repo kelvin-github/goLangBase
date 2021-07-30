@@ -23,7 +23,7 @@ func main() {
     *a01 = 100
     fmt.Printf("%T,%v,%v",*a01,&a01,*a01)
 
-    // new 很少用 一般用于 string int 申请内存（基本类型）
-    // make 只用于 slice map chan 申请内存，这三种类型 都是 引用类型（浅cp）
+    // new 很少用 一般用于 int string struct 申请内存（值类型） 返回的是 指针 (*int *string *struct )
+    // make 只用于 slice map chan 申请内存，这三种类型 都是 引用类型（浅cp）返回的是 对应的类型初始化
     
 }
