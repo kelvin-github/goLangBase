@@ -25,13 +25,13 @@ type persion struct {
     age int
 }
 
-// 值接收者
+// 值接收者 (有 返回)
 func (p persion) growup01 (n int) (int){
     age := p.age + n
     return age
 }
 
-// 指针接收者
+// 指针接收者 （直接 修改 源）
 func (p *persion) growup02(n int){
     p.age +=n
 }
