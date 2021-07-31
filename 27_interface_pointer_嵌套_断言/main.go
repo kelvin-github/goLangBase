@@ -34,10 +34,6 @@ type animal interface{
     eater
 }
 
-// interface 空接口
-func fly(x ...interface{}){   //用于 未知传值类型 的场景
-    fmt.Println(x)
-}
 func main(){
     var a0 = new(cat)   //interface 嵌套
 
@@ -70,21 +66,32 @@ func main(){
     mm := m1["hobby"]
     fmt.Printf("%T, %v",mm,mm)
 
-    // 类型断言
-    switch mm.(type){
-    case []string:
-        op,ok:=mm.([]string)
-        fmt.Println(op,ok)
-        op = append(op,"xxx")
-        fmt.Println(op)
-        mm = op
+    // 类型断言 interface{} 需要通过 断言 转换 原类型
+    switch mm.(type){   //go 固定写法 用来处理 各种 类型
+        case []string:
+            op,ok:=mm.([]string)    //实际 是这句来转换
+            fmt.Println(op,ok)
+            if ok{
+                op = append(op,"xxx")
+                fmt.Println(op)
+                mm = op
+            }
+        
     }
-    fmt.Print(mm)
-    
+    m1["hobby"] = mm
+    fmt.Println(m1)
 
+    m2 := make(map[string]interface{},1) //声明变量 同时初始化
+    m2["name"] = "kelvin02"
+    m2["age"] = 42
+    fmt.Println("任意类型",m2)
 
-    // m2 := make(map[string]interface{},1) //声明变量 同时初始化
-    // m2["name"] = "kelvin02"
-    // m2["age"] = 42
-    // fmt.Println("任意类型",m2)
+    // 空接口 
+    fly(m1)
 }
+
+// interface 空接口 作为 函数 参数
+func fly(x interface{}){   //用于 未知传值类型 的场景
+    fmt.Printf("空接口 参数：%v,Type:%T",x,x)
+}
+
