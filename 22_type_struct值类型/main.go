@@ -42,9 +42,14 @@ func main() {
     f2(&p01)    //
     fmt.Println(p01.Age)
 
+    var p03 = new(persion)  //p03 就是 一个指针
+    fmt.Printf("%T, %v \n",p03,p03)    
+    f2(p03)
+    fmt.Println(p03.Age)
 }
 func f2(p *persion){
-    (*p).Age = 1
+    // (*p).Age = 1
+    p.Age = 2
 }
 
 func f1(p persion){
