@@ -19,4 +19,7 @@ func main() {
     fileObj.Write( []byte(str) )    //写法1
 
     fileObj.WriteString(str)    //写法2
+
+    fmt.Fprint(fileObj,"Fprint:"+str)    //写法3
+
 }
