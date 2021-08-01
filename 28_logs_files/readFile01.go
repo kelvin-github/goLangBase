@@ -7,10 +7,10 @@ import (
 
 
 func main() {
-	fileObj, err := os.OpenFile("./logs.txt",os.O_CREATE|os.O_RDWR|os.O_APPEND, os.ModeAppend|os.ModePerm)  //如果文件不存在，就创建，区别 Open
+	// fileObj, err := os.OpenFile("./logs.txt",os.O_CREATE|os.O_RDWR|os.O_APPEND, os.ModeAppend|os.ModePerm)  //如果文件不存在，就创建，区别 Open
+	fileObj, err := os.Open("./logs.txt")
 	if err != nil {
-		fmt.Println("open file failed,err:",err)
-        
+		fmt.Println("open file failed,err:",err)        
         return
 	}
     defer fileObj.Close()
