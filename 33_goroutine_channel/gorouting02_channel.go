@@ -10,7 +10,7 @@ import (
 
 var wg sync.WaitGroup
 var ch01,ch02 chan int
-
+var once sync.Once  // 在 goroutine 中 指执行 1次
 func f01(ch01 chan int){
     defer wg.Done()
     defer close(ch01)
@@ -29,6 +29,9 @@ func f02(ch01,ch02 chan int){
         ch02<-x
         // fmt.Println("x平方值：",x)        
     }
+    once.Do(func(){ //如果 执行 过，就不会再执行
+        close(ch02)
+    })
 }
 
 func main(){
@@ -40,7 +43,7 @@ func main(){
     go f02(ch01,ch02)
     go f02(ch01,ch02)
     wg.Wait()
-    close(ch02)   
+    // close(ch02)   
     
     var i int = 0
     for{    // channel 这种 每取走一个 长度会变 的 类型，range 处理不了
