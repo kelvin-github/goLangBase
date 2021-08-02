@@ -7,6 +7,8 @@ import (
 
 
 func main() {
+    // time.Sleep(time.Second*5)   //暂停5秒
+    
 	// getNow()    //获取当前
     // getTimeStamp()  //时间戳（不同时区，时间戳 不一致）
     // timeStamp2Date()    //时间戳 转 日期
