@@ -13,3 +13,9 @@
 *.out
 
 /vendor/
+/43_RPC01/vendor
+/43_RPC02/vendor
+/PATENTS
+/LICENSE
+/AUTHORS
+/CONTRIBUTORS

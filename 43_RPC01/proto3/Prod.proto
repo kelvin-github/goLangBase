@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package services;
+option go_package ="/";
+
+message ProdRequest{
+    string prod_id = 1;
+}
+
+message ProdResponse{
+    string prod_stock = 1;
+}
+
+// 注册方法
+service ProdService{
+    rpc GetProdStock (ProdRequest) returns (ProdResponse);
+}
