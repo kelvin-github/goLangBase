@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Sample of websocket with golang</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            var ws = new WebSocket('ws://' + window.location.host + '/ws');
+            // var ws = new WebSocket('ws://localhost:8001/ws');
+            console.log(ws)
+            ws.onopen = function (evt) {
+                console.log("Connection open ...");
+                ws.send("Hello WebSockets1!");
+                ws.send("Hello WebSockets2!");
+                ws.send("Hello WebSockets3!");
+                ws.send("Hello WebSockets4!");
+                //如果我们一定时间不通信，TCP就会断开，无论我们是否手动断开
+                //ws.close();   
+            };
+            //接收到消息时触发  
+            ws.onmessage = function (evt) {
+                console.log("Received Message: " + evt.data);
+            };
+            //连接关闭时触发  
+            ws.onclose = function (evt) {
+                console.log("Connection closed.");
+            };
+        });
+    </script>
+</head>
+
+<body>
+    websocket test
+    <ul id="msg-list"></ul>
+</body>
+
+</html>
