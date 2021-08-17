@@ -1,14 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
-
-	"golang.org/x/net/html/charset"
-	"golang.org/x/text/encoding"
+	"regexp"
 )
 
 func main() {
@@ -33,15 +29,22 @@ func main() {
 	if err!=nil{
 		panic(err)
 	}
-	fmt.Printf("%s\n", all )
+	// fmt.Printf("%s\n", all )
+	printCityAll(all)
+
+
 }
 
-// 自动获取网页中的编码
-func determinEncoding(r io.Reader) encoding.Encoding{
-	bytes,err := bufio.NewReader(r).Peek(1024)
-	if err!=nil{
-		panic(err)
+// 解析 城市列表
+func printCityAll(content []byte){
+	// res := regexp.MustCompile(`<a href="http://www.zhenai.com/zhenghun/[a-zA-Z0-9]+"[^>]*>[^<]+</a>`)	//[^>]* 不是>符号的所有个; [^<]+不是< 的整个
+	res := regexp.MustCompile(`<a href="(http://www.zhenai.com/zhenghun/[a-zA-Z0-9]+)"[^>]*>([^<]+)</a>`)	//[^>]* 不是>符号的所有个; [^<]+不是< 的整个
+	// matcher := res.FindAll(content, -1)
+	matcher := res.FindAllSubmatch(content, -1)
+	// fmt.Println(matcher)
+
+	for _,m := range matcher{
+		// fmt.Printf("%s \n",m)
+		fmt.Printf("URL:%s , AD:%s\n",m[1],m[2])
 	}
-	ec,_,_ := charset.DetermineEncoding(bytes, "")
-	return ec
 }
