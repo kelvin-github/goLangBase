@@ -15,10 +15,18 @@
             };
             var $ul = $('#msg-list');
         });
+        function toSend() {
+            var message = document.getElementById("input").value;
+            console.log(message)
+            ws.send(message);
+        }
     </script>
+
 </head>
 
 <body>
+    <input id="input" />
+    <button onclick="toSend()">Send</button>
     <ul id="msg-list"></ul>
 </body>
 
